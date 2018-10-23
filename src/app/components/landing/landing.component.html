@@ -1,0 +1,33 @@
+<div class="search-container">
+  <mat-form-field>
+    <select matNativeControl placeholder="Category" [(ngModel)]="selectedCategory" name="category">
+      <option *ngFor="let category of categories" [value]="category.value">
+        {{category.viewValue}}
+      </option>
+    </select>
+  </mat-form-field>
+</div>
+<mat-divider class="body-breaker"></mat-divider>
+<div class="grid-container">
+  <mat-card *ngFor="let article of (articles ? articles.slice(limitFrom,limitTo): [])">
+    <img mat-card-image src="{{article.urlToImage}}">
+    <mat-card-content>
+      <h3>{{article.source.name}}</h3>
+      <p>{{article.content}}</p>
+      <mat-chip-list>
+        <mat-chip>{{article.author}}</mat-chip>
+      </mat-chip-list>
+    </mat-card-content>
+  </mat-card>
+</div>
+<mat-divider></mat-divider>
+
+<div>Displaying page
+  <a mat-icon-button color="primary" (click)="previousPage()" *ngIf="page > 1">
+    <mat-icon>arrow_left</mat-icon>
+  </a>{{this.page}}
+  <a mat-icon-button color="primary" (click)="nextPage()" *ngIf="page < totalPages">
+    <mat-icon>arrow_right</mat-icon>
+  </a> <span *ngIf="articles?.length">of {{getTotalPages(articles.length, resPerPage)}}</span>
+</div>
+

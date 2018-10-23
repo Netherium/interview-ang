@@ -11,8 +11,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar class="mat-elevation-z2">
-      <a mat-button routerLink="/">Home</a>
+    <mat-toolbar class="mat-elevation-z2" color="primary">
       <nav mat-tab-nav-bar backgroundColor="secondary" *ngIf="!(isHandset$ | async)">
         <a mat-tab-link
            *ngFor="let link of navLinks | noHomeNavLinks"
@@ -24,6 +23,23 @@
         </a>
       </nav>
       <span class="spacer"></span>
+      <div class="navbar-welcome-container">
+        <span class="navbar-initials">LC</span>
+        <span class="navbar-welcome-message">Hi Lara</span>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span>Settings</span>
+          </button>
+          <button mat-menu-item (click)="openLoginDialog()">
+            <mat-icon>person_outline</mat-icon>
+            <span>Login</span>
+          </button>
+        </mat-menu>
+      </div>
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -32,6 +48,10 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
     </mat-toolbar>
+    <div class="header">
+      <img class="bg-header" src="../assets/bg_header.jpeg">
+      <img class="profile-pic" src="../assets/sarah.jpg" alt="Lara Croft">
+    </div>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

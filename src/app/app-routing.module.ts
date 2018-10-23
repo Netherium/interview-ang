@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {HomeComponent} from './components/home/home.component';
 import {AboutComponent} from './components/about/about.component';
+import {LandingComponent} from './components/landing/landing.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: LandingComponent,
     pathMatch: 'full',
     data: {
       state: 'home',
