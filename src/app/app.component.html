@@ -13,14 +13,6 @@
   <mat-sidenav-content>
     <mat-toolbar class="mat-elevation-z2" color="primary">
       <nav mat-tab-nav-bar backgroundColor="secondary" *ngIf="!(isHandset$ | async)">
-        <a mat-tab-link
-           *ngFor="let link of navLinks | noHomeNavLinks"
-           [routerLink]="link.path"
-           routerLinkActive #rla="routerLinkActive"
-           [routerLinkActiveOptions]="{ exact: true }"
-           [active]="rla.isActive">
-          {{link.data.slug}}
-        </a>
       </nav>
       <span class="spacer"></span>
       <div class="navbar-welcome-container">
