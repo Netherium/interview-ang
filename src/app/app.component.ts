@@ -3,6 +3,7 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Router, Routes} from '@angular/router';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -24,8 +25,17 @@ export class AppComponent {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private  router: Router) {
+  constructor(private breakpointObserver: BreakpointObserver, private  router: Router, private snackBar: MatSnackBar) {
     this.navLinks = this.router.config;
     this.activeLink = this.router.config[0];
+    this.snackBar.openFromComponent(SnackInfoComponent, {
+      duration: 5000,
+    });
   }
 }
+
+@Component({
+  selector: 'app-snack-info',
+  template: `<span>This is an Angular 7 demo site.<br>Characters and news may be fictional.</span>`
+})
+export class SnackInfoComponent {}
