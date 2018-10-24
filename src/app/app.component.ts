@@ -13,8 +13,8 @@ export class AppComponent {
   user = {
     name: 'Lara',
     surname: 'Croft',
-    profileImage: 'sarah.jpg',
-    wallPaperImage: 'bg_header.jpeg'
+    profileImage: 'lara.png',
+    wallPaperImage: 'bg.jpg'
   };
 
   navLinks: Routes;
