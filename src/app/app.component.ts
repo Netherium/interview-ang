@@ -10,6 +10,13 @@ import {Router, Routes} from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  user = {
+    name: 'Lara',
+    surname: 'Croft',
+    profileImage: 'sarah.jpg',
+    wallPaperImage: 'bg_header.jpeg'
+  };
+
   navLinks: Routes;
   public activeLink;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

@@ -11,7 +11,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {NoHomeNavLinksPipe} from './pipes';
 import { AboutComponent } from './components/about/about.component';
 import { LandingComponent } from './components/landing/landing.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,8 @@ import {FormsModule} from '@angular/forms';
     MaterialModule,
     LayoutModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

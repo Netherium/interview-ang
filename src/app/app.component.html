@@ -14,8 +14,8 @@
     <mat-toolbar class="mat-elevation-z2" color="primary">
       <span class="spacer"></span>
       <div class="navbar-welcome-container">
-        <span class="navbar-initials">LC</span>
-        <span class="navbar-welcome-message">Hi Lara</span>
+        <span class="navbar-initials">{{ user.name | slice:0:1}}{{ user.surname | slice:0:1}}</span>
+        <span class="navbar-welcome-message">Hi {{user.name}}</span>
         <button mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>keyboard_arrow_down</mat-icon>
         </button>
@@ -39,8 +39,11 @@
       </button>
     </mat-toolbar>
     <div class="header">
-      <img class="bg-header" src="../assets/bg_header.jpeg">
-      <img class="profile-pic" src="../assets/sarah.jpg" alt="Lara Croft">
+      <img class="bg-header" src="../assets/{{user.wallPaperImage}}">
+      <div class="profile-image-container">
+        <img class="profile-pic mat-elevation-z2" src="../assets/{{user.profileImage}}">
+        <span class="profile-name mat-display-1">{{user.name}}&nbsp;{{user.surname}}</span>
+      </div>
     </div>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

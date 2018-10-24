@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Article} from '../../models/article.model';
 import {NewsService} from '../../services/news.service';
 import {debounceTime} from 'rxjs/operators';
@@ -18,41 +18,53 @@ export class LandingComponent {
   articles: Article[];
   page = 1;
   resPerPage = 6;
-  limitTo = 6;
+  limitTo = this.resPerPage;
   limitFrom = 0;
   totalPages = 0;
   searchTerm: FormControl = new FormControl();
-  searchResult = [];
-  selectedCategory;
+  selectedCategory: FormControl = new FormControl();
   categories: Category[] = [
-    {value: 'general', viewValue: 'General'},
     {value: 'business', viewValue: 'Business'},
-    {value: 'entertainment', viewValue: 'Entertainment'}
+    {value: 'entertainment', viewValue: 'Entertainment'},
+    {value: 'general', viewValue: 'General'},
+    {value: 'health', viewValue: 'Health'},
+    {value: 'science', viewValue: 'Science'},
+    {value: 'sports', viewValue: 'Sports'},
+    {value: 'technology', viewValue: 'Technology'}
   ];
+
 
   constructor(private articleService: NewsService) {
     this.list();
-    // this.selectedCategory.valueChanges
-    //   .pipe(
-    //     debounceTime(200)
-    //   )
-    //   .subscribe(data => {
-    //     this.articleService.suggest(data).subscribe(response => {
-    //       this.searchResult = response;
-    //     });
-    //   });
-  }
-
-
-  getTotalPages(length, resPerPage) {
-    this.totalPages = Math.ceil(length / resPerPage);
-    return this.totalPages;
+    this.searchTerm.valueChanges
+      .pipe(
+        debounceTime(200)
+      )
+      .subscribe(data => {
+        this.articleService.suggest(data).subscribe(response => {
+          this.articles = response.articles;
+          this.totalPages = Math.ceil(this.articles.length / this.resPerPage);
+          console.log(this.articles);
+        });
+      });
+    this.selectedCategory.valueChanges
+      .pipe(
+        debounceTime(200)
+      )
+      .subscribe(data => {
+        this.articleService.suggest(data).subscribe(response => {
+          this.articles = response.articles;
+          this.totalPages = Math.ceil(this.articles.length / this.resPerPage);
+          console.log(this.articles);
+        });
+      });
   }
 
   list() {
     this.articleService.list()
       .subscribe(result => {
         this.articles = result.articles;
+        this.totalPages = Math.ceil(this.articles.length / this.resPerPage);
       });
   }
 

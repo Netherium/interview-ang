@@ -1,11 +1,15 @@
 <div class="search-container">
-  <mat-form-field>
-    <select matNativeControl placeholder="Category" [(ngModel)]="selectedCategory" name="category">
-      <option *ngFor="let category of categories" [value]="category.value">
-        {{category.viewValue}}
-      </option>
-    </select>
+  <mat-form-field class="search-input">
+    <input matInput placeholder="Search" [formControl]="searchTerm">
   </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Category" [formControl]="selectedCategory">
+      <mat-option *ngFor="let category of categories" [value]="category.value">
+        {{category.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  {{selectedValue}}
 </div>
 <mat-divider class="body-breaker"></mat-divider>
 <div class="grid-container">
@@ -14,20 +18,26 @@
     <mat-card-content>
       <h3>{{article.source.name}}</h3>
       <p>{{article.content}}</p>
+    </mat-card-content>
+    <mat-card-actions>
       <mat-chip-list>
         <mat-chip>{{article.author}}</mat-chip>
       </mat-chip-list>
-    </mat-card-content>
+      <a mat-stroked-button href="{{article.url}}" color="accent">Read Mode</a>
+    </mat-card-actions>
   </mat-card>
 </div>
 <mat-divider></mat-divider>
 
-<div>Displaying page
+<div *ngIf="page && totalPages">
+  <span>Displaying page</span>
   <a mat-icon-button color="primary" (click)="previousPage()" *ngIf="page > 1">
     <mat-icon>arrow_left</mat-icon>
-  </a>{{this.page}}
+  </a>
+  <strong> {{this.page}} </strong>
   <a mat-icon-button color="primary" (click)="nextPage()" *ngIf="page < totalPages">
     <mat-icon>arrow_right</mat-icon>
-  </a> <span *ngIf="articles?.length">of {{getTotalPages(articles.length, resPerPage)}}</span>
+  </a>
+  <span *ngIf="articles?.length">of <strong>{{totalPages}}</strong></span>
 </div>
 
